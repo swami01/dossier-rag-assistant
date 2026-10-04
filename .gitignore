@@ -1,0 +1,19 @@
+# ALLOW-LIST: everything is ignored unless listed below, so nothing new
+# (secrets, venvs, databases, other projects' files) can be committed by accident.
+*
+
+!.gitignore
+!.env.example
+!README.md
+!requirements.txt
+
+!pipeline.py
+!api.py
+!dossier_chatbot.py
+!evaluate_all.py
+!make_questions.py
+!dosier_records.py
+
+!data/
+!data/dossiers.json
+!data/questions.json
