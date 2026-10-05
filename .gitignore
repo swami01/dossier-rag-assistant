@@ -17,3 +17,5 @@
 !data/
 !data/dossiers.json
 !data/questions.json
+!chroma_db/
+!chroma_db/**
