@@ -26,10 +26,10 @@ def standalone(question, history):
         return question
     convo = "\n".join(f"{m['role']}: {m['content'][:400]}" for m in history[-15:])
     prompt = ("Rewrite the user's last question as one self-contained question, resolving words like "
-              "'their', 'them', 'those', 'it' using the conversation. Keep every office, place, nationality "
-              "and number mentioned. If it is already self-contained, repeat it unchanged. "
-              "Output only the question.\n\n"
-              f"Conversation:\n{convo}\n\nLast question: {question}\nSelf-contained question:")
+            "'their', 'them', 'those', 'it' using the conversation. Keep every office, place, nationality "
+            "and number mentioned. If it is already self-contained, repeat it unchanged. "
+            "Output only the question.\n\n"
+            f"Conversation:\n{convo}\n\nLast question: {question}\nSelf-contained question:")
     return llm.invoke(prompt).text.strip() or question
 
 question = st.chat_input("Ask about dossiers")
@@ -37,8 +37,11 @@ if question:
     history = list(st.session_state.messages)             # earlier turns only
     st.session_state.messages.append({"role": "user", "content": question})
     st.chat_message("user").markdown(question)
-    if question.lower().strip(" !?.,") in GREETINGS:      # canned reply, no search, no LLM call
-        answer = "Hello! How can I help you with dossiers today?"
+    
+    g = question.lower().strip(" !?.,")
+    if g in GREETINGS:                                    # canned reply, no search, no LLM call
+        first = g.title() if g.startswith("good") else g.split(",")[0].title()
+        answer = f"{first}! How can I help you with dossiers today?"
     else:
         question = standalone(question, history)
         st.caption(f"Searching for: {question}")

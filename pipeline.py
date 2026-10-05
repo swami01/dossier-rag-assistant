@@ -157,8 +157,7 @@ def retrieve(question, user, mode="rerank", n=5):
 
 # ---------- generation ----------
 
-GREETINGS = {"hi", "hello", "hey", "how are you", "hello how are you", "hi how are you",
-             "good morning", "good afternoon", "good evening"}
+GREETINGS = {"hi", "hello", "hi, how are you", "hello, how are you", "good morning", "good afternoon", "good evening"}
 
 def build_prompt(question, docs):
     return f"""You are an assistant for a dossier management system. Use ONLY the dossier records below, never outside knowledge.
